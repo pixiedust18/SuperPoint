@@ -69,15 +69,14 @@ def compute_homography(matched_kp1, matched_kp2):
 
 def preprocess_image(img_file, img_size):
     
+    img = cv2.imread(img_file)
+    img_orig = img.copy()
+
     if len(img.shape) == 3:
-        img = cv2.imread(img_file, cv2.IMREAD_COLOR)
         img = cv2.resize(img, img_size)
-        img_orig = img.copy()
         img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     else:
-        img = cv2.imread(img_file, cv2.COLOR_BGR2GRAY)
-        img_orig = img.copy()
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        img = cv2.resize(img, img_size)
     
 
     img = np.expand_dims(img, 2)
